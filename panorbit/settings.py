@@ -31,8 +31,9 @@ ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]']
 # Application definition
 
 INSTALLED_APPS = [
-    'apps.users',
-    'apps.search',
+    'apps.users.apps.UsersConfig',
+    'apps.search.apps.SearchConfig',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,7 +53,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'panorbit.urls'
-
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -82,7 +83,7 @@ DATABASES = {
     }
 }
 #custom auth user model
-AUTH_USER_MODEL="apps.users.User"
+AUTH_USER_MODEL="users.User"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

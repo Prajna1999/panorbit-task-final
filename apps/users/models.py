@@ -18,11 +18,17 @@ class UserManager(BaseUserManager):
             phone_number=phone_number,
 
         )
+        #remove password
+        user.set_unusable_password()
         # save user to thedb
         user.save(using=self._db)
         return user
+    def create_superuser(self, email, first_name, last_name, gender,phone_number):
+        pass
 
 class User(AbstractBaseUser):
+
+    """ custome user model"""
     email=models.EmailField(verbose_name='email address', max_length=255, unique=True, primary_key=True)
     first_name=models.CharField(max_length=30)
     last_name=models.CharField(max_length=30)
