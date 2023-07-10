@@ -1,0 +1,20 @@
+<!-- panorbit-task-final-main/apps/users/templates/login.html -->
+
+<style>
+    form {
+        max-width: 300px;
+        margin: auto;
+        padding: 10px;
+    }
+    input[type="submit"] {
+        margin-top: 10px;
+    }
+</style>
+
+<h2>Login</h2>
+<form method="post">
+    {% csrf_token %}
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email"><br>
+    <input type="submit" value="Send OTP">
+</form>

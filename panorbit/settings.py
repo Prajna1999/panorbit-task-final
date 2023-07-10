@@ -25,14 +25,15 @@ SECRET_KEY = 'django-insecure-609kc6n_bzpwrda%tj248swbyb5^v5f1_)#xg%h3d$$z5kqk^t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]']
+ALLOWED_HOSTS = []
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'apps.users',
-    'apps.search',
+    'apps.users.apps.UsersConfig',
+    'apps.search.apps.SearchConfig',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +41,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework.authentication.SessionAuthentication',
+    ]
+}
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -52,6 +62,14 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'panorbit.urls'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#SMTP EMAIL BACKEND SETTING
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'gituprajna20@gmail.com'  
+EMAIL_HOST_PASSWORD = 'awjfyaprnldutcuk'  
 
 TEMPLATES = [
     {
@@ -79,10 +97,26 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    'data':{
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'data.sqlite',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'world',
+#         'USER': 'root',
+#         'PASSWORD': 'Prajna@1999',
+#         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+#         'PORT': '3306',
+#     }
+# }
+
 #custom auth user model
-AUTH_USER_MODEL="apps.users.User"
+AUTH_USER_MODEL="users.User"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -130,3 +164,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
