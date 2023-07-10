@@ -1,0 +1,20 @@
+<!-- panorbit-task-final-main/apps/users/templates/validate_otp.html -->
+
+<style>
+    form {
+        max-width: 300px;
+        margin: auto;
+        padding: 10px;
+    }
+    input[type="submit"] {
+        margin-top: 10px;
+    }
+</style>
+
+<h2>Enter OTP</h2>
+<form method="post">
+    {% csrf_token %}
+    <label for="otp">OTP:</label><br>
+    <input type="text" id="otp" name="otp"><br>
+    <input type="submit" value="Validate OTP">
+</form>

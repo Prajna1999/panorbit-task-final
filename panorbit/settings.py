@@ -69,7 +69,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'gituprajna20@gmail.com'  
-EMAIL_HOST_PASSWORD = 'Feb@2023'  
+EMAIL_HOST_PASSWORD = 'awjfyaprnldutcuk'  
 
 TEMPLATES = [
     {
@@ -95,10 +95,15 @@ WSGI_APPLICATION = 'panorbit.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'world',
+        'USER': 'root',
+        'PASSWORD': 'Prajna@1999',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
     }
 }
+
 #custom auth user model
 AUTH_USER_MODEL="users.User"
 
