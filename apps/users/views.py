@@ -21,7 +21,8 @@ def signup(request):
         if serializer.is_valid():
             try:
                 serializer.save()
-                return Response({'message': 'User created successfully'})
+                # return Response({'message': 'User created successfully'})
+                return redirect('login')
             except TypeError:
                 return Response({'error': 'A user with this email already exists.'}, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
