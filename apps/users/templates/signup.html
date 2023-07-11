@@ -1,28 +1,50 @@
-<!-- panorbit-task-final-main/apps/users/templates/signup.html -->
-
-<style>
-    form {
-        max-width: 300px;
-        margin: auto;
-        padding: 10px;
-    }
-    input[type="submit"] {
-        margin-top: 10px;
-    }
-</style>
-
-<h2>Signup</h2>
-<form method="post">
-    {% csrf_token %}
-    <label for="email">Email:</label><br>
-    <input type="email" id="email" name="email"><br>
-    <label for="fname">First Name:</label><br>
-    <input type="text" id="fname" name="fname"><br>
-    <label for="lname">Last Name:</label><br>
-    <input type="text" id="lname" name="lname"><br>
-    <label for="gender">Gender:</label><br>
-    <input type="text" id="gender" name="gender"><br>
-    <label for="phone">Phone Number:</label><br>
-    <input type="tel" id="phone" name="phone"><br>
-    <input type="submit" value="Signup">
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body{
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: aliceblue;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .signup-form {
+            background-color: white;
+            width: 320px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .signup-form label {
+            display: inline-block;
+            width: 100px;
+            margin-bottom: 10px;
+        }
+        .signup-form input {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+   
+    <form method="POST" class="signup-form">
+        {% csrf_token %}
+        <h2>Panorbit</h2>
+        <label for="email">Email:</label>
+        <input id="email" type="email" name="email" required><br>
+        <label for="first_name">First Name:</label>
+        <input id="first_name" type="text" name="first_name" required><br>
+        <label for="last_name">Last Name:</label>
+        <input id="last_name" type="text" name="last_name" required><br>
+        <label for="gender">Gender:</label>
+        <input id="gender" type="text" name="gender" required><br>
+        <label for="phone_number">Phone Number:</label>
+        <input id="phone_number" type="text" name="phone_number" required><br>
+        <input type="submit" value="Sign Up">
+    </form>
+</body>
+</html>
