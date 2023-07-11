@@ -88,6 +88,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'panorbit.wsgi.application'
+# panorbit-task-final-main/panorbit/settings.py
+
+
 
 
 # Database
@@ -103,6 +106,35 @@ DATABASES = {
         'NAME': BASE_DIR / 'data.sqlite',
     }
 }
+
+# class SearchRouter:
+#     """
+#     A router to control all database operations on models in the
+#     search application.
+#     """
+#     def db_for_read(self, model, **hints):
+#         if model._meta.app_label == 'search':
+#             return 'data'
+#         return None
+
+#     def db_for_write(self, model, **hints):
+#         if model._meta.app_label == 'search':
+#             return 'data'
+#         return None
+
+#     def allow_relation(self, obj1, obj2, **hints):
+#         if obj1._meta.app_label == 'search' or \
+#            obj2._meta.app_label == 'search':
+#            return True
+#         return None
+
+#     def allow_migrate(self, db, app_label, model_name=None, **hints):
+#         if app_label == 'search':
+#             return db == 'data'
+#         return None
+
+# DATABASE_ROUTERS = ['panorbit.settings.SearchRouter']
+
 
 # DATABASES = {
 #     'default': {

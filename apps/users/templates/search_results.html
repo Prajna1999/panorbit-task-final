@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Results</title>
+  <!-- Add your CSS files here -->
+ 
+</head>
+<body>
+  <h1>Search Results</h1>
+  <p>Showing results for "{{ query }}":</p>
+  <ul>
+    {% for result in results %}
+    <li>{{ result }}</li>
+    {% empty %}
+    <li>No results found.</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

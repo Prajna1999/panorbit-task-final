@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search</title>
+  <!-- Add your CSS files here -->
+ 
+</head>
+<body>
+  <h1>Search</h1>
+  <form method="GET" action="{% url 'search_results' %}">
+    <input type="text" name="q" id="search-input" placeholder="Search...">
+    <button type="submit">Search</button>
+  </form>
+
+  <!-- Add your JavaScript files here -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Autocomplete functionality
+      $('#search-input').on('input', function() {
+        var query = $(this).val();
+        if (query.length >= 2) {
+          $.ajax({
+            url: "{% url 'search_results' %}",
+            data: { term: query },
+            success: function(data) {
+              // Update autocomplete suggestions
+              $('#search-input').autocomplete({
+                source: data,
+                minLength: 2
+              });
+            }
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

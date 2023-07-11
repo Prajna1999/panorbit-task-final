@@ -5,17 +5,25 @@ from rest_framework.response import Response
 from django.contrib.auth import login, logout
 from django.core.mail import send_mail
 from django.contrib import messages
-from .models import User
+from django.contrib.auth.decorators import login_required
+from .models import User, Country
 from .utils import generate_otp
 from .serializers import SignupSerializer, OTPSerializer
+
+from django.http import JsonResponse
+from django.db.models import Q
 
 @api_view(['GET', 'POST'])
 def signup(request):
     if request.method == 'POST':
         serializer = SignupSerializer(data=request.data)
+
         if serializer.is_valid():
-            serializer.save()
-            return Response({'message': 'User created successfully'})
+            try:
+                serializer.save()
+                return Response({'message': 'User created successfully'})
+            except TypeError:
+                return Response({'error': 'A user with this email already exists.'}, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     return render(request, 'signup.html')
 
@@ -46,7 +54,8 @@ def validate_otp_view(request):
             if otp == request.session.get('otp'):
                 user = get_object_or_404(User, email=request.session['email'])
                 login(request, user)
-                return Response({'message': 'Logged in successfully'})
+                # return Response({'message': 'Logged in successfully'})
+                return redirect('search')
             return Response({'message': 'Invalid OTP'}, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     return render(request, 'validate_otp.html')
@@ -55,3 +64,13 @@ def validate_otp_view(request):
 def logout_view(request):
     logout(request)
     return render(request, 'logout.html')
+
+@login_required
+def search_view(request):
+    return render(request, 'search.html')
+@login_required
+def search_results(request):
+    query = request.GET.get('q', '')
+    results = User.objects.filter(name__icontains=query)
+    context = {'results': results, 'query': query}
+    return render(request, 'search_results.html', context)
